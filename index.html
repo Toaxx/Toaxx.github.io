@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Planning du Jour</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Meta -->
+    <meta name="theme-color" content="#C8B6A6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+
+    <!-- ========== APPLICATION ========== -->
+    <div class="app">
+
+        <!-- ========== HEADER ========== -->
+        <header class="header">
+            <div class="header__content">
+                <h1 class="header__title">
+                    Planning
+                    <span>du Jour</span>
+                </h1>
+                <p class="header__subtitle">Pour y voir clair chaque jour...</p>
+            </div>
+            <div class="header__decoration">
+                <svg class="header__pencil" viewBox="0 0 80 80" fill="none">
+                    <path d="M65 15L60 20L55 15L60 10L65 15Z" fill="#A89076"/>
+                    <path d="M60 20L25 55L20 60L15 65L20 60L25 55L60 20Z" fill="#C8B6A6"/>
+                    <rect x="18" y="58" width="40" height="8" rx="2" transform="rotate(-45 18 58)" fill="#D4C4B0"/>
+                    <path d="M15 65L12 72L20 68L15 65Z" fill="#8B7355"/>
+                </svg>
+            </div>
+        </header>
+
+        <!-- ========== NAVIGATION DATE ========== -->
+        <nav class="nav">
+            <!-- Bouton précédent -->
+            <button class="nav__arrow nav__arrow--prev" id="btn-prev" aria-label="Jour précédent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Centre -->
+            <div class="nav__center">
+                <!-- Date actuelle -->
+                <div class="nav__date">
+                    <span class="nav__weekday" id="weekday-name">Vendredi</span>
+                    <span class="nav__separator">•</span>
+                    <span class="nav__full-date" id="full-date">20 février 2026</span>
+                    <input type="date" class="nav__date-input" id="date-picker">
+                </div>
+
+                <!-- Jours de la semaine -->
+                <div class="nav__week">
+                    <button class="nav__day" data-day="1">L</button>
+                    <button class="nav__day" data-day="2">M</button>
+                    <button class="nav__day" data-day="3">M</button>
+                    <button class="nav__day" data-day="4">J</button>
+                    <button class="nav__day" data-day="5">V</button>
+                    <button class="nav__day" data-day="6">S</button>
+                    <button class="nav__day" data-day="0">D</button>
+                </div>
+            </div>
+
+            <!-- Bouton suivant -->
+            <button class="nav__arrow nav__arrow--next" id="btn-next" aria-label="Jour suivant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Bouton aujourd'hui -->
+            <button class="nav__today" id="btn-today">Aujourd'hui</button>
+        </nav>
+
+        <!-- ========== CONTENU PRINCIPAL ========== -->
+        <main class="main">
+
+            <!-- Planning horaire -->
+            <section class="card card--schedule">
+                <header class="card__header">
+                    <h2 class="card__title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Planning Horaire
+                    </h2>
+                </header>
+                <div class="card__content">
+                    <div class="schedule" id="schedule-container"></div>
+                </div>
+            </section>
+
+            <!-- Colonne droite -->
+            <div class="sidebar">
+
+                <!-- Choses à faire -->
+                <section class="card card--todos">
+                    <header class="card__header">
+                        <h2 class="card__title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 11l3 3L22 4"></path>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+                            Choses à Faire
+                        </h2>
+                    </header>
+                    <div class="card__content">
+                        <ul class="tasks" id="todos-container"></ul>
+                        <button class="btn-add" id="btn-add-todo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Ajouter une tâche
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Objectifs -->
+                <section class="card card--goals">
+                    <header class="card__header">
+                        <h2 class="card__title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                            Objectifs du Jour
+                        </h2>
+                    </header>
+                    <div class="card__content">
+                        <ul class="tasks" id="goals-container"></ul>
+                        <button class="btn-add" id="btn-add-goal">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Ajouter un objectif
+                        </button>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- ========== TOAST SAUVEGARDE ========== -->
+        <div class="toast" id="toast-save">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Sauvegardé</span>
+        </div>
+
+    </div>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+
+</body>
+</html>
